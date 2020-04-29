@@ -1,4 +1,4 @@
-package com.example.myproject.myproject;
+package com.example.myproject.myproject.io.repositories;
 
 import com.example.myproject.myproject.io.entity.UserEntity;
 import org.springframework.data.repository.CrudRepository;
