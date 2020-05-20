@@ -1,6 +1,5 @@
 package com.example.myproject.myproject.ui.controller;
 
-import com.example.myproject.myproject.exceptions.UserServiceException;
 import com.example.myproject.myproject.service.UserService;
 import com.example.myproject.myproject.shared.dto.UserDto;
 import com.example.myproject.myproject.ui.model.request.UserDetailsRequestModel;
