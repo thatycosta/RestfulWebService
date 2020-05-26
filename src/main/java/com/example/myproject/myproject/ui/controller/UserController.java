@@ -4,6 +4,7 @@ import com.example.myproject.myproject.service.UserService;
 import com.example.myproject.myproject.shared.dto.UserDto;
 import com.example.myproject.myproject.ui.model.request.UserDetailsRequestModel;
 import com.example.myproject.myproject.ui.model.response.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -39,8 +40,11 @@ public class UserController {
 
         if(userDetails.getFirstName().isEmpty()) throw  new NullPointerException("The object is null");
 
-        UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(userDetails, userDto);
+        //UserDto userDto = new UserDto();
+        //BeanUtils.copyProperties(userDetails, userDto);
+
+        ModelMapper modelMapper = new ModelMapper();
+        UserDto userDto = modelMapper.map(userDetails, UserDto.class);
 
         UserDto createdUser = userService.createUser(userDto);
         BeanUtils.copyProperties(createdUser, returnValue);
