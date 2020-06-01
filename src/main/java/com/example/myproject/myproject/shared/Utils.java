@@ -12,6 +12,11 @@ public class Utils {
     private final String ALPHABET  = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
     public String generateUserId(int lenght){
+
+        return generateRandomString(lenght);
+    }
+
+    public String generateAddressId(int lenght){
         return generateRandomString(lenght);
     }
 
