@@ -1,10 +1,13 @@
 package com.example.myproject.myproject.ui.controller;
 
+import com.example.myproject.myproject.service.AddressService;
 import com.example.myproject.myproject.service.UserService;
+import com.example.myproject.myproject.shared.dto.AddressDto;
 import com.example.myproject.myproject.shared.dto.UserDto;
 import com.example.myproject.myproject.ui.model.request.UserDetailsRequestModel;
 import com.example.myproject.myproject.ui.model.response.*;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,6 +22,12 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    AddressService addressService;
+
+    @Autowired
+    AddressService addressesService;
 
     @GetMapping(path = "/{id}",
                 produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
@@ -92,6 +101,34 @@ public class UserController {
         }
 
         return returnValue;
+    }
+
+    //http://localhost:8080/mobile-app-ws/users/sjfisjfiojfs/addresses
+    @GetMapping(path = "/{id}/addresses",
+            produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+    public List<AddressesRest> getUserAddresses(@PathVariable String id){
+
+        List<AddressesRest> returnValue = new ArrayList<>();
+
+        List<AddressDto> addressesDto = addressesService.getAddresses(id);
+
+        if(addressesDto != null && !addressesDto.isEmpty()) {
+            java.lang.reflect.Type listType = new TypeToken<List<AddressesRest>>() {}.getType();
+            returnValue = new ModelMapper().map(addressesDto, listType);
+        }
+
+        return returnValue;
+    }
+
+    @GetMapping(path = "/{id}/addresses/{addressId}",
+            produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+    public AddressesRest getUserAddress(@PathVariable String addressId){
+
+        AddressDto addressDto =  addressService.getAddress(addressId);
+
+        ModelMapper modelMapper = new ModelMapper();
+
+        return modelMapper.map(addressDto, AddressesRest.class);
     }
 
 }
