@@ -8,7 +8,6 @@ import com.example.myproject.myproject.ui.model.request.UserDetailsRequestModel;
 import com.example.myproject.myproject.ui.model.response.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
